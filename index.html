@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Restaurant REA — Dalmatinska elegancija · Sv. Filip i Jakov</title>
+<meta name="description" content="Restaurant REA u Sv. Filipu i Jakovu — dalmatinska i mediteranska kuhinja, svježa riba i roštilj uz jadransku rivu. Klasična elegancija i topla gostoljubivost." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ivory:#F6F2EA; --alabaster:#FBF8F2; --olive:#6E7A52; --olive-deep:#4C5638;
+    --terracotta:#B5683F; --charcoal:#2A2823; --charcoal-soft:#4A463E;
+    --line:#D9D2C4; --gold:#A8895C;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ivory); color:var(--charcoal);
+    font-family:'Inter',sans-serif; font-weight:300; line-height:1.7;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Cormorant Garamond',serif; font-weight:500; line-height:1.08; letter-spacing:.01em;}
+  .serif-it{font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:400;}
+  .wrap{max-width:1200px; margin:0 auto; padding:0 32px;}
+  .eyebrow{font-family:'Inter',sans-serif; font-weight:500; font-size:.72rem; letter-spacing:.32em; text-transform:uppercase; color:var(--terracotta);}
+  a{color:inherit; text-decoration:none;}
+  img{display:block; width:100%; height:100%; object-fit:cover;}
+
+  /* Header */
+  header{position:fixed; top:0; left:0; right:0; z-index:100; padding:22px 0;
+    transition:background .5s ease, padding .5s ease, box-shadow .5s ease;}
+  header.scrolled{background:rgba(251,248,242,.92); backdrop-filter:blur(10px); padding:14px 0; box-shadow:0 1px 0 var(--line);}
+  .nav{display:flex; align-items:center; justify-content:space-between;}
+  .brand{font-family:'Cormorant Garamond',serif; font-size:1.65rem; font-weight:600; letter-spacing:.18em; color:var(--charcoal);}
+  .brand span{color:var(--terracotta);}
+  .nav-links{display:flex; gap:38px; align-items:center;}
+  .nav-links a{font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; color:var(--charcoal-soft); transition:color .3s;}
+  .nav-links a:hover{color:var(--terracotta);}
+  .btn-resv{font-family:'Inter',sans-serif; font-weight:500; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase;
+    color:#fff; background:var(--olive); padding:13px 26px; border-radius:2px; transition:background .35s, transform .35s; border:none; cursor:pointer;}
+  .btn-resv:hover{background:var(--olive-deep); transform:translateY(-2px);}
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .burger span{width:26px; height:1.5px; background:var(--charcoal); transition:.3s;}
+
+  /* Hero */
+  .hero{position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden;}
+  .hero-media{position:absolute; inset:0; clip-path:inset(0 0 100% 0);}
+  .hero-media::after{content:""; position:absolute; inset:0; background:linear-gradient(105deg, rgba(246,242,234,.92) 0%, rgba(246,242,234,.62) 38%, rgba(246,242,234,.18) 72%, rgba(42,40,35,.15) 100%);}
+  .hero-media img{filter:saturate(.92) brightness(1.02);}
+  .hero-inner{position:relative; z-index:3; padding-top:90px;}
+  .hero h1{font-size:clamp(3.2rem,8.5vw,7rem); color:var(--charcoal); margin:.18em 0 .12em;}
+  .hero h1 .flow{display:block; color:var(--terracotta);}
+  .hero .tag{font-size:clamp(1.35rem,3vw,2.1rem); color:var(--charcoal-soft); max-width:560px; margin-bottom:34px;}
+  .hero .meta{display:flex; gap:26px; align-items:center; font-size:.82rem; letter-spacing:.14em; text-transform:uppercase; color:var(--olive-deep); flex-wrap:wrap;}
+  .hero .meta span{display:flex; align-items:center; gap:9px;}
+  .laurel{position:absolute; z-index:2; opacity:.14;}
+  .laurel.r{right:5%; top:18%; width:230px; color:var(--olive);}
+
+  /* Divider */
+  .div-line{height:1px; background:var(--line); width:100%; margin:0;}
+  .ornament{display:flex; align-items:center; justify-content:center; gap:18px; color:var(--gold); margin:0 auto;}
+  .ornament::before,.ornament::after{content:""; height:1px; width:70px; background:var(--line);}
+
+  section{position:relative;}
+  .pad{padding:120px 0;}
+
+  /* Manifest */
+  .manifest{text-align:center; max-width:860px; margin:0 auto;}
+  .manifest .eyebrow{display:block; margin-bottom:26px;}
+  .manifest p{font-family:'Cormorant Garamond',serif; font-size:clamp(1.7rem,3.6vw,2.7rem); line-height:1.35; color:var(--charcoal); font-weight:400;}
+  .manifest p em{color:var(--terracotta);}
+
+  /* Stats / count-up */
+  .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:30px; margin-top:78px; max-width:780px; margin-left:auto; margin-right:auto;}
+  .stat{text-align:center;}
+  .stat .num{font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,6vw,4.2rem); color:var(--olive); font-weight:600; line-height:1;}
+  .stat .lbl{font-size:.74rem; letter-spacing:.22em; text-transform:uppercase; color:var(--charcoal-soft); margin-top:12px;}
+
+  /* Story */
+  .story-grid{display:grid; grid-template-columns:1.05fr 1fr; gap:74px; align-items:center;}
+  .story-img{aspect-ratio:4/5; overflow:hidden; border-radius:3px; box-shadow:0 30px 70px -38px rgba(42,40,35,.5);}
+  .story-text h2{font-size:clamp(2.4rem,5vw,3.6rem); margin-bottom:24px;}
+  .story-text h2 .serif-it{display:block; color:var(--terracotta); font-size:.7em;}
+  .story-text p{color:var(--charcoal-soft); margin-bottom:20px; font-size:1.02rem;}
+
+  /* Menu */
+  .menu-head{text-align:center; margin-bottom:70px;}
+  .menu-head h2{font-size:clamp(2.6rem,6vw,4.4rem);}
+  .menu-head .serif-it{color:var(--terracotta);}
+  .menu-cols{display:grid; grid-template-columns:1fr 1fr; gap:64px;}
+  .menu-cat{margin-bottom:54px;}
+  .menu-cat > h3{font-family:'Inter',sans-serif; font-weight:500; font-size:.82rem; letter-spacing:.26em; text-transform:uppercase; color:var(--terracotta);
+    padding-bottom:14px; margin-bottom:26px; border-bottom:1px solid var(--line);}
+  .dish{margin-bottom:24px;}
+  .dish h4{font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:600; color:var(--charcoal); margin-bottom:3px;}
+  .dish p{font-size:.92rem; color:var(--charcoal-soft);}
+
+  /* Gallery */
+  .gal-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:42px; flex-wrap:wrap; gap:16px;}
+  .gal-head h2{font-size:clamp(2.4rem,5vw,3.6rem);}
+  .gal-head .hint{font-size:.74rem; letter-spacing:.2em; text-transform:uppercase; color:var(--charcoal-soft);}
+  .gal-track{display:flex; gap:22px; overflow-x:auto; padding-bottom:14px; cursor:grab; scroll-snap-type:x mandatory; scrollbar-width:none;}
+  .gal-track::-webkit-scrollbar{display:none;}
+  .gal-track.drag{cursor:grabbing;}
+  .gal-item{flex:0 0 clamp(280px,42vw,460px); aspect-ratio:3/4; overflow:hidden; border-radius:3px; scroll-snap-align:center; box-shadow:0 22px 50px -34px rgba(42,40,35,.5);}
+  .gal-item img{transition:transform 1.1s cubic-bezier(.2,.8,.2,1);}
+  .gal-item:hover img{transform:scale(1.05);}
+
+  /* Location */
+  .loc-grid{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); border-radius:4px; overflow:hidden;}
+  .loc-info{padding:64px 56px; background:var(--alabaster);}
+  .loc-info h2{font-size:clamp(2.2rem,4.5vw,3.2rem); margin-bottom:8px;}
+  .loc-info .serif-it{color:var(--terracotta); font-size:1.4rem;}
+  .loc-block{margin-top:34px;}
+  .loc-block h4{font-family:'Inter',sans-serif; font-weight:600; font-size:.74rem; letter-spacing:.22em; text-transform:uppercase; color:var(--olive); margin-bottom:10px;}
+  .loc-block p{color:var(--charcoal-soft); font-size:1rem;}
+  .loc-block a:hover{color:var(--terracotta);}
+  .hours-row{display:flex; justify-content:space-between; max-width:330px; padding:7px 0; border-bottom:1px dashed var(--line); font-size:.95rem; color:var(--charcoal-soft);}
+  .loc-map{min-height:480px;}
+  .loc-map iframe{width:100%; height:100%; min-height:480px; border:0; filter:grayscale(.25) saturate(.9);}
+
+  /* CTA band */
+  .cta{text-align:center; padding:120px 0; background:var(--charcoal); color:var(--ivory);}
+  .cta h2{font-size:clamp(2.6rem,6vw,4.6rem); color:var(--ivory); margin-bottom:18px;}
+  .cta h2 .serif-it{color:var(--gold);}
+  .cta p{color:#cfc8b8; max-width:520px; margin:0 auto 36px; font-size:1.05rem;}
+  .cta .btn-resv{background:var(--terracotta); padding:16px 40px; font-size:.84rem;}
+  .cta .btn-resv:hover{background:#9c5733;}
+  .cta .phone{display:block; margin-top:24px; font-family:'Cormorant Garamond',serif; font-size:1.7rem; color:var(--gold); letter-spacing:.04em;}
+
+  /* Footer */
+  footer{background:var(--charcoal); color:#bdb6a6; padding:60px 0 40px; border-top:1px solid rgba(168,137,92,.25);}
+  .foot-grid{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:30px;}
+  .foot-brand{font-family:'Cormorant Garamond',serif; font-size:1.8rem; letter-spacing:.16em; color:var(--ivory);}
+  .foot-brand span{color:var(--terracotta);}
+  .foot-grid p{font-size:.9rem;}
+  .foot-grid a:hover{color:var(--gold);}
+  .foot-bottom{margin-top:46px; padding-top:24px; border-top:1px solid rgba(255,255,255,.08); font-size:.78rem; color:#8a8475; text-align:center; letter-spacing:.05em;}
+
+  /* Reveal */
+  .reveal{opacity:0; transform:translateY(38px);}
+
+  @media (max-width:900px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .story-grid,.menu-cols,.loc-grid{grid-template-columns:1fr;}
+    .loc-info{padding:48px 30px;}
+    .stats{grid-template-columns:1fr; gap:44px;}
+    .pad{padding:84px 0;}
+    .laurel.r{display:none;}
+    .wrap{padding:0 24px;}
+    .story-grid{gap:44px;}
+    .menu-cols{gap:0;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1!important; transform:none!important;}
+    .hero-media{clip-path:none!important;}
+    html{scroll-behavior:auto;}
+    *{transition:none!important;}
+  }
+</style>
+</head>
+<body>
+<header id="header">
+  <div class="wrap nav">
+    <a href="#top" class="brand">R<span>E</span>A</a>
+    <nav class="nav-links">
+      <a href="#prica">Priča</a>
+      <a href="#jelovnik">Jelovnik</a>
+      <a href="#galerija">Galerija</a>
+      <a href="#lokacija">Lokacija</a>
+    </nav>
+    <a href="#lokacija" class="btn-resv">Rezerviraj stol</a>
+    <button class="burger" id="burger" aria-label="Izbornik"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-media" id="heroMedia">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2000&q=80" alt="Elegantno serviran mediteranski stol u Restaurantu REA" />
+  </div>
+  <svg class="laurel r" viewBox="0 0 100 200" fill="none" stroke="currentColor" stroke-width="1.4">
+    <path d="M50 0 V200 M50 40 q-22 6 -30 -14 M50 40 q22 6 30 -14 M50 80 q-26 6 -34 -16 M50 80 q26 6 34 -16 M50 120 q-24 6 -32 -16 M50 120 q24 6 32 -16 M50 160 q-20 5 -28 -14 M50 160 q20 5 28 -14"/>
+  </svg>
+  <div class="wrap hero-inner">
+    <span class="eyebrow reveal">Sv. Filip i Jakov · Jadranska rivijera</span>
+    <h1 class="reveal">Restaurant<span class="flow serif-it">Rea</span></h1>
+    <p class="tag serif-it reveal">Gdje more, kamen i klasična gracioznost teku u jednom tanjuru.</p>
+    <div class="meta reveal">
+      <span>● Dalmatinska kuhinja</span>
+      <span>● Svježa riba &amp; roštilj</span>
+      <span>● Uz rivu</span>
+    </div>
+  </div>
+</section>
+
+<div class="div-line"></div>
+
+<section class="pad">
+  <div class="wrap manifest">
+    <span class="eyebrow reveal">Naša filozofija</span>
+    <p class="reveal">Ime <em>Rea</em> nosi gracioznost majke svih bogova — onu koja njeguje, daruje i teče bez napora. U našoj kuhinji ta je gracioznost u jednostavnosti: <em>svježa riba iz Jadrana</em>, maslinovo ulje s domaćih škrapa i sezona koja diktira tanjur.</p>
+    <div class="stats">
+      <div class="stat reveal"><div class="num" data-count="30">0</div><div class="lbl">Godina uz rivu</div></div>
+      <div class="stat reveal"><div class="num" data-count="100">0</div><div class="lbl">% svježi ulov</div></div>
+      <div class="stat reveal"><div class="num" data-count="12">0</div><div class="lbl">Mediteranskih klasika</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="ornament reveal">&#10070;</div></div>
+
+<section class="pad" id="prica">
+  <div class="wrap story-grid">
+    <div class="story-img reveal">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1100&q=80" alt="Profinjeni interijer Restauranta REA uz more" />
+    </div>
+    <div class="story-text">
+      <span class="eyebrow reveal">Naša priča</span>
+      <h2 class="reveal">Topla gracioznost<span class="serif-it">uz jadransku obalu</span></h2>
+      <p class="reveal">Restaurant REA rodio se iz ljubavi prema dalmatinskom stolu — onome za kojim se ostaje satima, uz pjev cvrčaka i miris mora. Smješten u mirnom Sv. Filipu i Jakovu, nadomak marine i stare rive, već godinama otvara vrata gostima koji traže elegantnu jednostavnost.</p>
+      <p class="reveal">Naš tanjur slijedi ritam Jadrana: jutarnji ulov, plodove naših vrtova i recepte naslijeđene od baka. Svaki je obrok mali obred — posluga koja njeguje, vino koje teče, večer koja se otegne do zvijezda.</p>
+      <p class="reveal serif-it" style="color:var(--terracotta); font-size:1.2rem;">Dobrodošli za naš stol.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="jelovnik" style="background:var(--alabaster);">
+  <div class="wrap">
+    <div class="menu-head reveal">
+      <span class="eyebrow">Iz naše kuhinje</span>
+      <h2>Jelovnik <span class="serif-it">mora i kamena</span></h2>
+    </div>
+    <div class="menu-cols">
+      <div>
+        <div class="menu-cat reveal">
+          <h3>Za početak</h3>
+          <div class="dish"><h4>Dalmatinska pjata</h4><p>Domaći pršut, ovčji sir s Paga, masline i kapari u maslinovom ulju.</p></div>
+          <div class="dish"><h4>Marinirani inćuni</h4><p>Jadranski inćuni u limunu i peršinu, uz prepečenac.</p></div>
+          <div class="dish"><h4>Salata od hobotnice</h4><p>Sporo kuhana hobotnica, mladi krumpir, crveni luk i ekstra djevičansko ulje.</p></div>
+          <div class="dish"><h4>Buzara od školjki</h4><p>Dagnje i kućice u bijelom vinu, češnjaku i mrvicama kruha.</p></div>
+        </div>
+        <div class="menu-cat reveal">
+          <h3>Tjestenina &amp; rižoto</h3>
+          <div class="dish"><h4>Crni rižoto</h4><p>Rižoto od sipe s domaćom sipinom crnilom i kapljicom maslinova ulja.</p></div>
+          <div class="dish"><h4>Šurlice s škampima</h4><p>Domaća tjestenina, škampi i cherry rajčica u laganom umaku.</p></div>
+          <div class="dish"><h4>Njoki s tartufima</h4><p>Mekani njoki, istarski tartuf i zrela ribana skuta.</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="menu-cat reveal">
+          <h3>Iz mora &amp; s roštilja</h3>
+          <div class="dish"><h4>Riba dana s gradela</h4><p>Svježi ulov pečen na žaru, blitva s krumpirom i maslinovo ulje.</p></div>
+          <div class="dish"><h4>Gradele od plodova mora</h4><p>Škampi, lignje i ribe sezone s roštilja, uz domaći prilog.</p></div>
+          <div class="dish"><h4>Brudet po dalmatinski</h4><p>Mediteranski riblji gulaš s palentom, kako se sprema generacijama.</p></div>
+          <div class="dish"><h4>Janjetina s ražnja</h4><p>Polako pečena janjetina iz zaleđa, mladi krumpir i ružmarin.</p></div>
+          <div class="dish"><h4>Biftek na žaru</h4><p>Zreli odrezak, pečene rajčice i umak od ružmarina.</p></div>
+        </div>
+        <div class="menu-cat reveal">
+          <h3>Za kraj</h3>
+          <div class="dish"><h4>Rožata</h4><p>Tradicionalni dalmatinski karamel-krem s mirisom rožulina.</p></div>
+          <div class="dish"><h4>Smokve u medu</h4><p>Pečene smokve, domaći med i orasi, uz kuglicu sladoleda.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="galerija">
+  <div class="wrap">
+    <div class="gal-head reveal">
+      <div>
+        <span class="eyebrow">Trenuci za stolom</span>
+        <h2>Galerija</h2>
+      </div>
+      <span class="hint">&#8592; povucite za listanje &#8594;</span>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="gal-track" id="galTrack">
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=900&q=80" alt="Elegantno plirano jelo od ribe" /></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80" alt="Mediteranski tanjur" /></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=80" alt="Tjestenina s plodovima mora" /></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=900&q=80" alt="Jadransko more i obala" /></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=900&q=80" alt="Profinjeno servirano predjelo" /></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=900&q=80" alt="Stol s vinom i prijateljima" /></div>
+    </div>
+  </div>
+</section>
+
+<div class="div-line"></div>
+
+<section class="pad" id="lokacija">
+  <div class="wrap">
+    <div class="loc-grid">
+      <div class="loc-info">
+        <span class="eyebrow reveal">Posjetite nas</span>
+        <h2 class="reveal">Sv. Filip i Jakov<br><span class="serif-it">uz rivu</span></h2>
+        <div class="loc-block reveal">
+          <h4>Adresa</h4>
+          <p>Obala / riva, 23207 Sv. Filip i Jakov<br>Zadarska rivijera, Hrvatska</p>
+        </div>
+        <div class="loc-block reveal">
+          <h4>Rezervacije</h4>
+          <p><a href="tel:+38523550720">+385 23 550 720</a></p>
+        </div>
+        <div class="loc-block reveal">
+          <h4>Radno vrijeme</h4>
+          <div class="hours-row"><span>Pon — Pet</span><span>11:00 — 23:00</span></div>
+          <div class="hours-row"><span>Subota</span><span>11:00 — 24:00</span></div>
+          <div class="hours-row"><span>Nedjelja</span><span>11:00 — 23:00</span></div>
+          <p style="margin-top:12px; font-size:.86rem;">Sezonsko radno vrijeme — preporučujemo rezervaciju.</p>
+        </div>
+        <a href="tel:+38523550720" class="btn-resv reveal" style="margin-top:30px; display:inline-block;">Rezerviraj stol</a>
+      </div>
+      <div class="loc-map reveal">
+        <iframe src="https://maps.google.com/maps?q=Restaurant+REA+Sveti+Filip+i+Jakov&output=embed" loading="lazy" title="Lokacija Restaurant REA"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--gold);">Rezervacije</span>
+    <h2 style="margin-top:18px;">Stol vas <span class="serif-it">čeka</span></h2>
+    <p>Pridružite nam se za večer dalmatinske gracioznosti — svježeg mora, dobrog vina i tople gostoljubivosti uz jadransku rivu.</p>
+    <a href="tel:+38523550720" class="btn-resv">Rezerviraj stol</a>
+    <a href="tel:+38523550720" class="phone">+385 23 550 720</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">R<span>E</span>A</div>
+        <p style="margin-top:12px; max-width:280px;">Dalmatinska i mediteranska kuhinja uz jadransku rivu u Sv. Filipu i Jakovu.</p>
+      </div>
+      <div>
+        <p style="text-transform:uppercase; letter-spacing:.2em; font-size:.74rem; color:var(--gold); margin-bottom:12px;">Kontakt</p>
+        <p><a href="tel:+38523550720">+385 23 550 720</a></p>
+        <p>Sv. Filip i Jakov, Hrvatska</p>
+      </div>
+      <div>
+        <p style="text-transform:uppercase; letter-spacing:.2em; font-size:.74rem; color:var(--gold); margin-bottom:12px;">Radno vrijeme</p>
+        <p>Pon — Ned · 11:00 — 23:00</p>
+        <p>Subotom do ponoći</p>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 Restaurant REA · Sv. Filip i Jakov · Sva prava pridržana</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Header scroll state
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Mobile menu (simple anchor scroll — links hidden, burger jumps to lokacija for resv)
+document.getElementById('burger').addEventListener('click', () => {
+  document.getElementById('jelovnik').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+});
+
+if (!reduce) {
+  // Lenis smooth scroll
+  const lenis = new Lenis({ duration: 1.15, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+  function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll', ScrollTrigger.update);
+
+  // Hero clip-path reveal
+  gsap.to('#heroMedia', { clipPath: 'inset(0 0 0% 0)', duration: 1.6, ease: 'power3.inOut', delay: .15 });
+
+  // Hero text stagger
+  gsap.to('.hero-inner .reveal', { opacity: 1, y: 0, duration: 1.1, stagger: .14, ease: 'power3.out', delay: .55 });
+  gsap.set('.hero-inner .reveal', { y: 30 });
+
+  // Section reveals
+  gsap.utils.toArray('.reveal').forEach(el => {
+    if (el.closest('.hero-inner')) return;
+    gsap.fromTo(el, { opacity: 0, y: 38 }, {
+      opacity: 1, y: 0, duration: 1, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 88%' }
+    });
+  });
+
+  // Count-up
+  gsap.utils.toArray('[data-count]').forEach(el => {
+    const target = +el.dataset.count;
+    ScrollTrigger.create({
+      trigger: el, start: 'top 85%', once: true,
+      onEnter: () => gsap.to({ v: 0 }, { v: target, duration: 1.8, ease: 'power2.out',
+        onUpdate: function(){ el.textContent = Math.round(this.targets()[0].v); } })
+    });
+  });
+} else {
+  gsap.set?.('.hero-inner .reveal', { opacity: 1 });
+}
+
+// Draggable gallery
+const track = document.getElementById('galTrack');
+let isDown = false, startX, scrollLeft;
+track.addEventListener('mousedown', e => { isDown = true; track.classList.add('drag'); startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('drag'); });
+track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('drag'); });
+track.addEventListener('mousemove', e => { if(!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; track.scrollLeft = scrollLeft - (x - startX) * 1.5; });
+</script>
+</body>
+</html>
